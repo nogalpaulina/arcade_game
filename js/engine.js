@@ -80,7 +80,17 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
+    }
+
+    // Reset the player if there is a collision with an enemy
+    function checkCollisions() {
+        allEnemies.forEach(function(enemy){
+            // Check to see if the enemy and player are in the same block
+            if ((enemy.x-50<=player.x === player.x<=enemy.x+50) && enemy.y === player.y) {
+                player.reset();
+            }
+        });
     }
 
     /* This is called by the update function  and loops through all of the
