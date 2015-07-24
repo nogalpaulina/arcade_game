@@ -6,7 +6,7 @@ var Enemy = function(y, speed) {
     this.y = y;
     this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -14,16 +14,16 @@ Enemy.prototype.update = function(dt) {
     this.x = this.x + (this.speed * dt);
     if (this.x >= 505) {
         this.x = -101;
-        y_coordinates = [72, 155, 238];
+        var yCoordinates = [72, 155, 238];
         // randomly select a new y-coordinate
-        this.y = y_coordinates[Math.floor(Math.random()*y_coordinates.length)];
+        this.y = yCoordinates[Math.floor(Math.random() * yCoordinates.length)];
     }
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Player
 var Player = function() {
@@ -32,8 +32,9 @@ var Player = function() {
 };
 
 // Player wins when reaching the water
-Player.prototype.update = function(dt) {
+Player.prototype.update = function() {
     if (this.y === -11) {
+        alert("Way to go!");
         this.reset();
     }
 };
@@ -44,14 +45,14 @@ Player.prototype.reset = function() {
     this.y = 404;
 };
 
-Player.prototype.render = function(dt) {
+Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 // Move player
 // Parameter: direction, which direction to move
 Player.prototype.handleInput = function(direction) {
-    if (direction === 'left' &&  this.x > 0) {
+    if (direction === 'left' && this.x > 0) {
         this.x = this.x - 101;
     } else if (direction === 'up' && this.y > 0) {
         this.y = this.y - 83;
