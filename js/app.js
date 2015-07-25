@@ -16,7 +16,7 @@ Enemy.prototype.update = function(dt) {
         this.x = -101;
         var yCoordinates = [72, 155, 238];
         // randomly select a new y-coordinate
-        this.y = yCoordinates[Math.floor(Math.random() * yCoordinates.length)];
+        this.y = chooseRandomFrom(yCoordinates);
     }
 };
 
@@ -34,7 +34,8 @@ var Player = function() {
 // Player wins when reaching the water
 Player.prototype.update = function() {
     if (this.y === -11) {
-        alert("Way to go!");
+        var messages = ["Great job!", "Way to go!", "You squashed those bugs!", "You've mastered this game!", "Will you play again?", "You're awesome!"];
+        alert(chooseRandomFrom(messages)); 
         this.reset();
     }
 };
@@ -78,3 +79,9 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+//  Returns a random value from the array
+// Parameter: array; the array of values to choose from
+function chooseRandomFrom(array){
+    return array[Math.floor(Math.random() * array.length)];
+}
